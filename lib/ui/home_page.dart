@@ -48,46 +48,56 @@ class _HomePageState extends State<HomePage> {
                             RaisedButton(
                               child: Text('19'),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GetListByUmur(umur: 19);
-                                }));
+                                Navigator.pop(context);
+                                search("19");
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //   return GetListByUmur(umur: 19);
+                                // }));
                               },
                             ),
                             RaisedButton(
                               child: Text('20'),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GetListByUmur(umur: 20);
-                                }));
+                                Navigator.pop(context);
+                                search("20");
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //   return GetListByUmur(umur: 20);
+                                // }));
                               },
                             ),
                             RaisedButton(
                               child: Text('21'),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GetListByUmur(umur: 21);
-                                }));
+                                Navigator.pop(context);
+                                search("21");
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //   return GetListByUmur(umur: 21);
+                                // }));
                               },
                             ),
                             RaisedButton(
                               child: Text('22'),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GetListByUmur(umur: 22);
-                                }));
+                                Navigator.pop(context);
+                                search("22");
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //   return GetListByUmur(umur: 22);
+                                // }));
                               },
                             ),
                             RaisedButton(
                               child: Text('23'),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return GetListByUmur(umur: 23);
-                                }));
+                                Navigator.pop(context);
+                                search("23");
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //   return GetListByUmur(umur: 23);
+                                // }));
                               },
                             ),
                           ],
@@ -137,6 +147,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// Bisa gunakan fungsi method search sebelum nya dengan menambahkan filter or by umur
+  /// Atau bisa buat method beru dengan method seperti ini
+
+  filterByAges(String inputQuery) {
+    listBackUp = listUser;
+    if (inputQuery.isNotEmpty) {
+      listBackUp = listUser
+          .where((element) => element.umur.toLowerCase() == inputQuery)
+          .toList();
+    }
+    setState(() {});
+  }
+
   search(String inputQuery) {
     if (inputQuery.isEmpty) {
       // listUser = listBackUp;
@@ -144,7 +167,9 @@ class _HomePageState extends State<HomePage> {
     } else {
       String query = inputQuery.toLowerCase();
       listBackUp = listUser
-          .where((element) => element.nama.toLowerCase().contains(query))
+          .where((element) =>
+              element.nama.toLowerCase().contains(query) ||
+              element.umur.toLowerCase() == inputQuery)
           .toList();
     }
     setState(() {});
